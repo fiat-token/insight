@@ -17,7 +17,6 @@ angular.module('insight.currency').controller('CurrencyController',
         if (value === 0.00000000) return '0 ' + this.symbol; // fix value to show
 
         var response;
-
         this.factor = 10000;
         response = _roundFloat((value * this.factor), 8);
 
