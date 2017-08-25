@@ -15,7 +15,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
     var  str  =  '';
     for  (var  i  =  0;  i  < hex.length;  i++) {
       var  n;
-      if  (string[i]  ==  ' ')  n  =  i;
+      if  (hex[i]  ==  ' ')  n  =  i;
       if  (i  >  n) {
         str  +=  String.fromCharCode(parseInt(hex.substr(i,  2),  16));
         i  +=  1;
