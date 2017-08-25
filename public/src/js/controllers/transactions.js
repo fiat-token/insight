@@ -47,7 +47,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
 
       // non standard output
       if (items[i].scriptPubKey && !items[i].scriptPubKey.addresses) {
-        items[i].scriptPubKey.addresses = opReturnCleaning(items[i].scriptPubKey.asm);
+        items[i].scriptPubKey.addresses = [opReturnCleaning(items[i].scriptPubKey.asm)];
         items[i].notAddr = true;
         notAddr = true;
       }
