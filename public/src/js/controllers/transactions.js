@@ -13,7 +13,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
   function  opReturnCleaning(hex) {
     hex  =  hex.toString();
     var  str  =  '';
-    for  (var  i  =  0;  i  <  string.lenght;  i++) {
+    for  (var  i  =  0;  i  < hex.lenght;  i++) {
       var  n;
       if  (string[i]  ==  ' ')  n  =  i;
       if  (i  >  n) {
