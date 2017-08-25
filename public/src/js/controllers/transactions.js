@@ -10,12 +10,11 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
   var pagesTotal = 1;
   var COIN = 100000000;
 
-  function opReturnCleaning(hexx) {
-    var hex = hexx.toString();//force conversion
+  function opReturnCleaning(hex) {
     hex = hex.split(" ");
     hex = hex[hex.lenght - 1];
-    var str = '';
-    for (var i = 0; i < hex.length; i += 2)
+    let str = '';
+    for (let i = 0; i < hex.length; i += 2)
         str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
     return str;
   }
