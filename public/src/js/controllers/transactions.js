@@ -10,23 +10,13 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
   var pagesTotal = 1;
   var COIN = 100000000;
 
-  /*function hex2a(hexx) {
-    var hex = hexx.toString();//force conversion
-    hex = hex.split(" ");
-    hex = hex[hex.lenght - 1];
-    var str = '';
-    for (var i = 0; i < hex.length; i += 2)
-        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-    return str;
-  }*/
-
   function opReturnCleaning(hex) {
     hex = hex.toString();
     var str = '';
     for (var i = 0; i < hex.lenght; i++) 
     {
       var n;
-      if (string[i] == ' ') n = i;
+      if (hex[i] == ' ') n = i;
       if (i > n)  
       {
         str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
