@@ -10,6 +10,16 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
   var pagesTotal = 1;
   var COIN = 100000000;
 
+  function opReturnCleaning(hexx) {
+    var hex = hexx.toString();//force conversion
+    hex = hex.split(" ");
+    hex = hex[hex.lenght - 1];
+    var str = '';
+    for (var i = 0; i < hex.length; i += 2)
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+    return str;
+  }
+
   var _aggregateItems = function(items) {
     if (!items) return [];
 
@@ -31,7 +41,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
 
       // non standard output
       if (items[i].scriptPubKey && !items[i].scriptPubKey.addresses) {
-        items[i].scriptPubKey.addresses = ['Unparsed address [' + u++ + ']'];
+        items[i].scriptPubKey.addresses = opReturnCleaning(items[i].scriptPubKey.asm);
         items[i].notAddr = true;
         notAddr = true;
       }
