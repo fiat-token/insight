@@ -17,19 +17,9 @@ angular.module('insight.currency').controller('CurrencyController',
         if (value === 0.00000000) return '0 ' + this.symbol; // fix value to show
 
         var response;
+        this.factor = 10000;
+        response = _roundFloat((value * this.factor), 8);
 
-        if (this.symbol === 'USD') {
-          response = _roundFloat((value * this.factor), 2);
-        } else if (this.symbol === 'BTC') {
-          this.factor = 1;
-          response = _roundFloat((value * this.factor), 5);
-        } else if (this.symbol === 'bits') {
-          this.factor = 1000000;
-          response = _roundFloat((value * this.factor), 2);
-        } else { // assumes symbol is BTC
-          this.factor = 10000;
-          response = _roundFloat((value * this.factor), 8);
-        }
         // prevent sci notation
         if (response < 1e-7) response=response.toFixed(8);
 
@@ -42,18 +32,7 @@ angular.module('insight.currency').controller('CurrencyController',
     $scope.setCurrency = function(currency) {
       $rootScope.currency.symbol = currency;
       localStorage.setItem('insight-currency', currency);
-
-      if (currency === 'USD') {
-        Currency.get({}, function(res) {
-          $rootScope.currency.factor = $rootScope.currency.bitstamp = res.data.bitstamp;
-        });
-      } else if (currency === 'BTC') {
-        $rootScope.currency.factor = 1;
-      } else if (currency === 'bits') {
-        $rootScope.currency.factor = 1000000;
-      } else {
-        $rootScope.currency.factor = 10000;
-      }
+      $rootScope.currency.factor = 10000;
     };
 
     // Get initial value
