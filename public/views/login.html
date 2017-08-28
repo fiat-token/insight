@@ -1,0 +1,26 @@
+<p>
+    <h1> {{ loginDescription }} </h1>
+</p>
+
+<div ng-show='notLoggedIn' class='col-md-12'>
+    <div class='container'>
+        <div class='card card-container'>
+            <form name='formSignIn' class='form-signin' ng-submit='login()'>
+                <img id='profile-img' class='profile-img-card' src='../../images/avatar_2x.png' />
+                <p id='profile-name' class='profile-name-card'></p>
+                <span id='reauth-email' class='reauth-email'></span>
+
+                <!--Insert username-->
+                <span class='requiredField' ng-show='formSignIn.inputusername.$touched && formSignIn.inputusername.$invalid'>This field is required</span>
+                <input type='text' id='inputusername' name='inputusername' class='form-control' placeholder='Insert username' ng-model='username' required>
+
+                <!--Insert Password-->
+                <span class='requiredField' ng-show='formSignIn.inputPassword.$touched && formSignIn.inputPassword.$invalid'>This field is required</span>
+                <input type='password' id='inputPassword' name='inputPassword' class='form-control' placeholder='Insert password' ng-model='userPassword' required>
+
+                <button class='btn btn-lg btn-primary btn-block btn-signin' type='submit' ng-disabled='formSignIn.$invalid'>Sign in</button>
+            </form>
+            <a href='/#register' class='forgot-password'>Register</a>
+        </div>
+    </div>
+</div>
