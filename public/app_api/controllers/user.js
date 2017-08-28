@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var crypto = require('crypto');
 var passport = require('passport');
-var lib = require('../../public/lib/libServer');
+var lib = require('../../public/src/js/lib/libServer');
 
 //C
 module.exports.addUser = function (req, res) {
