@@ -5,7 +5,7 @@ angular.module('insight').config(function($routeProvider) {
   $routeProvider.
     when('/block/:blockHash', {
       templateUrl: 'views/block.html',
-      title: 'Bitcoin Block '
+      title: 'vEURO Block '
     }).
     when('/block-index/:blockHeight', {
       controller: 'BlocksController',
@@ -17,7 +17,7 @@ angular.module('insight').config(function($routeProvider) {
     }).
     when('/tx/:txId/:v_type?/:v_index?', {
       templateUrl: 'views/transaction.html',
-      title: 'Bitcoin Transaction '
+      title: 'vEURO Transaction '
     }).
     when('/home', {
       templateUrl: 'views/index.html',
@@ -25,7 +25,7 @@ angular.module('insight').config(function($routeProvider) {
     }).
     when('/blocks', {
       templateUrl: 'views/block_list.html',
-      title: 'Bitcoin Blocks solved Today'
+      title: 'vEURO Blocks solved Today'
     }).
     when('/', {
       templateUrl: 'views/login.html',
@@ -34,11 +34,11 @@ angular.module('insight').config(function($routeProvider) {
     }).
     when('/blocks-date/:blockDate/:startTimestamp?', {
       templateUrl: 'views/block_list.html',
-      title: 'Bitcoin Blocks solved '
+      title: 'vEURO Blocks solved '
     }).
     when('/address/:addrStr', {
       templateUrl: 'views/address.html',
-      title: 'Bitcoin Address '
+      title: 'vEURO Address '
     }).
     when('/status', {
       templateUrl: 'views/status.html',
