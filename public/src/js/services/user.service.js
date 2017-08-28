@@ -28,13 +28,13 @@ function userServices($http) {
     self.login = function (body) {
 
         return $http.post('/api/user/login', body)
-            .then((data) => { lib.makePromise(lib.saveToken(data.data.token, _setProperties)) })
+            .then( function(data) { lib.makePromise(lib.saveToken(data.data.token, _setProperties)) })
             .catch(lib.rejectPromise);
     }
 
     self.register = function (body) {
 
-        var doLogin = () => {
+        var doLogin = function() {
             var user = {
                 username: body.username,
                 password: body.password,
@@ -43,7 +43,7 @@ function userServices($http) {
         };
 
         return doLogin()
-            .then((data) => { lib.makePromise(lib.saveToken(data.data.token, _setProperties)) })
+            .then( function(data) { lib.makePromise(lib.saveToken(data.data.token, _setProperties)) })
             .catch(lib.rejectPromise);
     };
 }

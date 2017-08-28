@@ -20,8 +20,8 @@ var loginCtrl = function ($scope, $window, userServices) {
         $scope.login = function () {
             userServices.login({ username: $scope.username, password: $scope.userPassword })
                 .then(
-                () => { $window.location.assign('/insight') },
-                (err) => { console.error(err); $scope.loginDescription = 'error: ' + err.data.message; }
+                function() { $window.location.assign('/insight') },
+                function(err) { console.error(err); $scope.loginDescription = 'error: ' + err.data.message; }
                 );
         }
     }
