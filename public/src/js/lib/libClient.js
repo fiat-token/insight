@@ -4,7 +4,7 @@
         return new Promise(function (resolve, reject) { resolve(promiseBody); });
     };
     lib.rejectPromise = function (error) {
-        let promise = new Promise(function (resolve, reject) { console.log(error); reject(error); });
+        var promise = new Promise(function (resolve, reject) { console.log(error); reject(error); });
         return promise;
     };
     lib.logError = function (err) { console.error(err); };
