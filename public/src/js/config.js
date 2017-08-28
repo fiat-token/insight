@@ -21,7 +21,7 @@ angular.module('insight').config(function($routeProvider) {
     }).
     when('/home', {
       templateUrl: 'views/index.html',
-      title: 'Home'
+      title: 'vEURO Home'
     }).
     when('/blocks', {
       templateUrl: 'views/block_list.html',
