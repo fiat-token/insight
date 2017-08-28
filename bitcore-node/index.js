@@ -1,9 +1,15 @@
 'use strict';
 
+require('dotenv').load();
 var BaseService = require('./service');
 var inherits = require('util').inherits;
 var fs = require('fs');
 var pkg = require('../package');
+var passport = require('passport');
+
+require('/../public/app_api/models/db');
+require('/../public/app_api/config/passport');
+var routesApi = require('/../public/app_api/routes/index');
 
 var InsightUI = function(options) {
   BaseService.call(this, options);
@@ -31,6 +37,8 @@ InsightUI.prototype.setupRoutes = function(app, express) {
   var self = this;
   app.use(express.static(__dirname + '/../public'));
   // if not in found, fall back to indexFile (404 is handled client-side)
+  app.use(passport.initialize());    
+  app.use('/api', routesApi);
   app.use(function(req, res, next) {
     res.setHeader('Content-Type', 'text/html');
     res.send(self.indexFile);
