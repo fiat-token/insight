@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var dbURI = 'mongodb://localhost/commoditytrading';
+var dbURI = 'mongodb://localhost/virtualeuro';
 mongoose.Promise = global.Promise;
 mongoose.connect(dbURI);
 
@@ -16,7 +16,7 @@ mongoose.connection.on('disconnected', function () {
     console.log('Mongoose disconnected');
 });
 
-let gracefulShutdown = function (msg, callback) {
+var gracefulShutdown = function (msg, callback) {
     mongoose.connection.close(function () {
         console.log('Mongoose disconnected through ' + msg);
         callback();

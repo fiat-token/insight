@@ -9,7 +9,7 @@ var auth = expressjwt({
 //User
 var ctrlUser = require('../controllers/user');
 router.post('/user/add', ctrlUser.addUser);
-router.get('/user/get', ctrlUser.getPlayer);
+router.get('/user/get', ctrlUser.getUser);
 router.post('/user/update', ctrlUser.updateUser);
 router.delete('/user/delete', ctrlUser.deleteUser);
 
