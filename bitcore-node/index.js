@@ -6,12 +6,22 @@ var BaseService = require('./service');
 var inherits = require('util').inherits;
 var fs = require('fs');
 var pkg = require('../package');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var passport = require('passport');
 
 require('../public/app_api/models/db');
 require('../public/app_api/config/passport');
 var routesApi = require('../public/app_api/routes/index');
 var appExpress = express();
+
+appExpress.use(logger('dev'));
+appExpress.use(bodyParser.json({limit: '50mb'}));
+//appExpress.use(bodyParser.urlencoded({ extended: false }));
+appExpress.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+appExpress.use(cookieParser());
 
 appExpress.use(passport.initialize());
 appExpress.use('/api', routesApi);
