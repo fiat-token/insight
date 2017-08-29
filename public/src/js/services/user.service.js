@@ -20,14 +20,14 @@ function userServices($http) {
 
     self.getUser = function () {
         console.log('Calling get user method...');
-        var users = $http.get('/api/user/get');
+        var users = $http.get('/insight-api/user/get');
         console.log('Get users method called!');
         return users;
     };
 
     self.login = function (body) {
 
-        return $http.post('/api/user/login', body)
+        return $http.post('/insight-api/user/login', body)
             .then( function(data) { lib.makePromise(lib.saveToken(data.data.token, _setProperties)) })
             .catch(lib.rejectPromise);
     }
@@ -39,7 +39,7 @@ function userServices($http) {
                 username: body.username,
                 password: body.password,
             };
-            return $http.post('/api/user/register', user)
+            return $http.post('/insight-api/user/register', user)
         };
 
         return doLogin()
