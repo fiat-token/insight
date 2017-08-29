@@ -2,7 +2,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var lib = require('../../public/src/js/lib/libServer');
+var lib = require('../../src/js/lib/libServer');
 
 passport.use('user-local', new LocalStrategy(
     {
