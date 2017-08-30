@@ -861,7 +861,7 @@ a.v_highlight_more {
   background-color: #F7F7F7;
   /* just in case there no content*/
   padding: 20px 25px 30px;
-  margin: 0 auto 25px;
+  margin: auto;
   margin-top: 50px;
   /* shadows and rounded borders */
   -moz-border-radius: 2px;
@@ -905,7 +905,7 @@ a.v_highlight_more {
   box-sizing: border-box;
 }
 
-.form-signin #inputEmail,
+.form-signin #inputusername,
 .form-signin #inputPassword {
   direction: ltr;
   height: 44px;
@@ -966,4 +966,17 @@ a.v_highlight_more {
 .forgot-password:active,
 .forgot-password:focus{
   color: rgb(12, 97, 33);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.notLoggedIn {
+  margin: 35%;
+}
+
+.loginDescr {
+  margin-top: 12%;
+  margin-left: 30%;
 }

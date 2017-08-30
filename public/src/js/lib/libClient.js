@@ -16,9 +16,8 @@
     lib.getToken = function () {
         return window.localStorage['virtualeuro-token'];
     };
-    lib.logout = function (refreshProperties) {
+    lib.logout = function () {
         window.localStorage.removeItem('virtualeuro-token');
-        refreshProperties();
     };
     lib.isLoggedIn = function () {
         var token = lib.getToken();

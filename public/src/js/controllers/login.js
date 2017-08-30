@@ -10,6 +10,7 @@ var loginCtrl = function ($scope, $window, userServices) {
         }
     
         $scope.notLoggedIn = true;
+        $scope.loginDescription = "Please insert your credentials: "
     
         userServices.getUser()
             .then(

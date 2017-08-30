@@ -39,3 +39,7 @@ angular.module('insight.connection', []);
 angular.module('insight.currency', []);
 angular.module('insight.messages', []);
 angular.module('insight.login', []);
+
+angular.module('insight').config(['$httpProvider', function ($httpProvider) {
+  $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + lib.getToken();
+}]);

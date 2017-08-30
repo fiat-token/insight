@@ -1,10 +1,24 @@
 'use strict';
 
 angular.module('insight.system').controller('HeaderController',
-  function($scope, $rootScope, $modal, getSocket, Global, Block) {
+  function($scope, $rootScope, $modal, $window, $location, getSocket, Global, Block) {
     $scope.global = Global;
 
-    $scope.isLoggedIn = lib.isLoggedIn();
+    if (lib.isLoggedIn()) {
+      $scope.isLoggedIn = true;
+    }
+    // else if ($location.path() != '/') {
+    //   $scope.isLoggedIn = false;
+    //   $window.location.assign('/insight');
+    // }
+    else {
+      $scope.isLoggedIn = false;
+    }
+
+    $scope.logout = function () {
+        lib.logout();
+        $window.location.assign('/insight');
+    };
 
     $rootScope.currency = {
       factor: 10000,
