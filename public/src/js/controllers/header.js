@@ -4,6 +4,8 @@ angular.module('insight.system').controller('HeaderController',
   function($scope, $rootScope, $modal, getSocket, Global, Block) {
     $scope.global = Global;
 
+    $scope.isLoggedIn = lib.isLoggedIn();
+
     $rootScope.currency = {
       factor: 10000,
       bitstamp: 0,

@@ -10,14 +10,14 @@
     lib.logError = function (err) { console.error(err); };
     lib.getDataFromArray = function (array) { return array.map(function (elem) { return elem.data }); }
     lib.saveToken = function (token, refreshProperties) {
-        window.localStorage['commodityTrading-token'] = token;
+        window.localStorage['virtualeuro-token'] = token;
         refreshProperties();
     };
     lib.getToken = function () {
-        return window.localStorage['commodityTrading-token'];
+        return window.localStorage['virtualeuro-token'];
     };
     lib.logout = function (refreshProperties) {
-        window.localStorage.removeItem('commodityTrading-token');
+        window.localStorage.removeItem('virtualeuro-token');
         refreshProperties();
     };
     lib.isLoggedIn = function () {
