@@ -973,10 +973,11 @@ a.v_highlight_more {
 }
 
 .notLoggedIn {
-  margin: 20% 37%;
+  padding-top: 18%;
+  padding-left: 37%;
 }
 
 .loginDescr {
-  margin-top: 12%;
+  margin-top: 2%;
   margin-left: 30%;
 }
