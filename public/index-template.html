@@ -42,7 +42,7 @@
 	<div id="wrap">
 		<div class="navbar navbar-default navbar-fixed-top" data-ng-include="'views/includes/header.html'" role='navigation'></div>
 		<div data-ng-controller="templateController">
-      <section class="container" data-ng-view ng-show="isLoggedIn" style="padding-top: 5%"></section>
+      <section class="container section" data-ng-view ng-show="isLoggedIn"></section>
       <div ng-if="!isLoggedIn">
         <h1 class="notLoggedIn">You are not logged in!</h1>
       </div>

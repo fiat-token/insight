@@ -979,6 +979,9 @@ a.v_highlight_more {
 }
 
 .loginDescr {
-  margin-top: 2%;
   margin-left: 30%;
+}
+
+.section {
+  padding-top: 7%;
 }
