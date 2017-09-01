@@ -5,7 +5,7 @@ angular.module('insight').config(function($routeProvider) {
   $routeProvider.
     when('/block/:blockHash', {
       templateUrl: 'views/block.html',
-      title: 'vEURO Block '
+      title: 'vToken Block '
     }).
     when('/block-index/:blockHeight', {
       controller: 'BlocksController',
@@ -17,15 +17,15 @@ angular.module('insight').config(function($routeProvider) {
     }).
     when('/tx/:txId/:v_type?/:v_index?', {
       templateUrl: 'views/transaction.html',
-      title: 'vEURO Transaction '
+      title: 'vToken Transaction '
     }).
     when('/home', {
       templateUrl: 'views/index.html',
-      title: 'vEURO Home'
+      title: 'vToken Home'
     }).
     when('/blocks', {
       templateUrl: 'views/block_list.html',
-      title: 'vEURO Blocks solved Today'
+      title: 'vToken Blocks solved Today'
     }).
     when('/', {
       templateUrl: 'views/login.html',
@@ -34,11 +34,11 @@ angular.module('insight').config(function($routeProvider) {
     }).
     when('/blocks-date/:blockDate/:startTimestamp?', {
       templateUrl: 'views/block_list.html',
-      title: 'vEURO Blocks solved '
+      title: 'vToken Blocks solved '
     }).
     when('/address/:addrStr', {
       templateUrl: 'views/address.html',
-      title: 'vEURO Address '
+      title: 'vToken Address '
     }).
     when('/status', {
       templateUrl: 'views/status.html',
