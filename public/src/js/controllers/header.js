@@ -23,7 +23,7 @@ angular.module('insight.system').controller('HeaderController',
     $rootScope.currency = {
       factor: 10000,
       bitstamp: 0,
-      symbol: 'vEUR'
+      symbol: 'vTkn'
     };
 
     $scope.menu = [{
