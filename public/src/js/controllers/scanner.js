@@ -116,7 +116,8 @@ angular.module('insight.system').controller('ScannerController',
       console.log('QR code detected: ' + str);
       $searchInput
         .val(str)
-        .submit();
+        .triggerHandler('change')
+        .triggerHandler('submit');
     };
 
     $scope.cancel = function() {
