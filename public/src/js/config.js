@@ -47,6 +47,10 @@ angular.module('insight').config(function($routeProvider) {
     when('/messages/verify', {
       templateUrl: 'views/messages_verify.html',
       title: 'Verify Message'
+    }).
+    when('/opreturn/:opreturnHash', {
+      templateUrl: 'views/opreturn.html',
+      title: 'vToken OpReturn '
     })
     .otherwise({
       templateUrl: 'views/404.html',

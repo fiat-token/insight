@@ -24,7 +24,8 @@ angular.module('insight',[
   'insight.connection',
   'insight.currency',
   'insight.messages',
-  'insight.login'
+  'insight.login',
+  'insight.opreturns'
 ]);
 
 angular.module('insight.system', []);
@@ -39,6 +40,7 @@ angular.module('insight.connection', []);
 angular.module('insight.currency', []);
 angular.module('insight.messages', []);
 angular.module('insight.login', []);
+angular.module('insight.opreturns', []);
 
 angular.module('insight').config(['$httpProvider', function ($httpProvider) {
   $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + lib.getToken();
