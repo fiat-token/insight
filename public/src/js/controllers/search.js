@@ -41,34 +41,45 @@ angular.module('insight.search').controller('SearchController',
             _resetSearch();
             $location.path('address/' + q);
           },
-            function () { //address not found, search on OpReturn
-              OpReturn.get({
-                opreturnHash: q
-              }, function () {
-                _resetSearch();
-                $location.path('opreturn/' + q);
-              },
-                function () { //opreturn not found, search on BlockHeight
-                  if (isFinite(q)) { // ensure that q is a finite number. A logical height value.
-                    BlockByHeight.get({
-                      blockHeight: q
-                    }, function (hash) {
-                      _resetSearch();
-                      $location.path('/block/' + hash.blockHash);
-                    }, function () { // block by height not found
+            function () { //address not found, search on BlockByHeight
+              if (isFinite(q)) { // ensure that q is a finite number. A logical height value.
+                BlockByHeight.get({
+                  blockHeight: q
+                }, function (hash) {
+                  _resetSearch();
+                  $location.path('/block/' + hash.blockHash);
+                }, function () { // block by height not found, search on OpReturn
+                  var hex = lib.StrToHex(q);
+                  OpReturn.get({
+                    opreturnHash: hex
+                  }, function () {
+                    _resetSearch();
+                    $location.path('opreturn/' + hex);
+                  },
+                    function () { //not found, fail :(
                       $scope.loading = false;
                       _badQuery();
                     });
-                  }
-                  else { //not found, fail :(
+                });
+              }
+              else {
+                var hex = lib.StrToHex(q);
+                OpReturn.get({
+                  opreturnHash: hex
+                }, function () {
+                  _resetSearch();
+                  $location.path('opreturn/' + hex);
+                },
+                  function () { //not found, fail :(
                     $scope.loading = false;
                     _badQuery();
                   }
-                });
-            });
+                );
+              };
 
+            });
         });
       });
-    };
 
+    }
   });

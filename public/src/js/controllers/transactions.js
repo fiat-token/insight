@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('insight.transactions').controller('transactionsController',
-function($scope, $rootScope, $routeParams, $location, Global, Transaction, TransactionsByBlock, TransactionsByAddress) {
+function($scope, $rootScope, $routeParams, $location, Global, Transaction, TransactionsByBlock, TransactionsByAddress, OpReturn) {
   $scope.global = Global;
   $scope.loading = false;
   $scope.loadedBy = null;
@@ -9,22 +9,6 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
   var pageNum = 0;
   var pagesTotal = 1;
   var COIN = 100000000;
-
-  function opReturnCleaning(hex) {
-    hex = hex.toString();
-    var str = '';
-    for (var i = 0; i < hex.length; i++) 
-    {
-      var n;
-      if (hex[i] == ' ') n = i;
-      if (i > n)  
-      {
-        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-        i += 1; 
-      }
-    }
-    return str;
-  }
 
   var _aggregateItems = function(items) {
     if (!items) return [];
@@ -47,7 +31,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
 
       // non standard output
       if (items[i].scriptPubKey && !items[i].scriptPubKey.addresses) {
-        items[i].scriptPubKey.addresses = [opReturnCleaning(items[i].scriptPubKey.asm)];
+        items[i].scriptPubKey.addresses = [lib.opReturnCleaning(items[i].scriptPubKey.asm)];
         items[i].notAddr = true;
         notAddr = true;
       }
@@ -125,6 +109,19 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
     });
   };
 
+  var _byOpreturn = function () {
+    OpReturn.get({
+      opreturnHash: $routeParams.opreturnHash,
+    }, function (txs) {
+      pageNum += 1;
+      $scope.loading = false;
+      txs.result.forEach(function (tx) {
+        _processTX(tx);
+        $scope.txs.push(tx);
+      });
+    });
+  }
+
   var _findTx = function(txid) {
     Transaction.get({
       txId: txid
@@ -167,6 +164,9 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
       if ($scope.loadedBy === 'address') {
         _byAddress();
       }
+      else if($scope.loadedBy === 'opreturn') {
+        _byOpreturn();
+      }
       else {
         _byBlock();
       }
@@ -181,6 +181,13 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
     $scope.itemsExpanded = true;
   }
   
+  $scope.pushTxs = function(txs) {
+    txs.forEach(function(tx) {
+      _processTX(tx);
+      $scope.txs.push(tx);
+    });
+  }
+
   //Init without txs
   $scope.txs = [];
 
