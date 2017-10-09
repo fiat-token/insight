@@ -115,7 +115,14 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
     }, function (txs) {
       pageNum += 1;
       $scope.loading = false;
+      console.log("OP RETURN Transactions");
       txs.result.forEach(function (tx) {
+        var valueIn = 0;
+        for(index = 0; index < tx.vin.length; index++)
+        valueIn += tx.vin[index].valueSat;
+        tx.fees = (valueIn - tx.valueOut) / 1e8;
+        tx.valueOut = tx.valueOut / 1e8;
+        console.log(tx);
         _processTX(tx);
         $scope.txs.push(tx);
       });
