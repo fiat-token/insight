@@ -36,6 +36,10 @@ angular.module('insight').config(function($routeProvider) {
       templateUrl: 'views/block_list.html',
       title: 'vToken Blocks solved '
     }).
+    when('/blocks-date/:blockDate/:startTimestamp/:limit?', {
+      templateUrl: 'views/block_list.html',
+      title: 'vToken Blocks solved '
+    }).
     when('/address/:addrStr', {
       templateUrl: 'views/address.html',
       title: 'vToken Address '
