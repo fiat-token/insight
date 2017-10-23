@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('insight.search').controller('SearchController',
-  function ($scope, $routeParams, $location, $timeout, Global, Block, Transaction, Address, OpReturn, BlockByHeight) {
+  function ($scope, $routeParams, $location, $timeout, Global, Block, Transaction, Address, OpReturn, BlockByHeight, PhoneNumber) {
     $scope.global = Global;
     $scope.loading = false;
 
@@ -48,19 +48,31 @@ angular.module('insight.search').controller('SearchController',
                 }, function (hash) {
                   _resetSearch();
                   $location.path('/block/' + hash.blockHash);
-                }, function () { // block by height not found, search on OpReturn
-                  var hex = lib.StrToHex(q);
-                  OpReturn.get({
-                    opreturnHash: hex
-                  }, function () {
-                    _resetSearch();
-                    $location.path('opreturn/' + hex);
-                  },
-                    function () { //not found, fail :(
-                      $scope.loading = false;
-                      _badQuery();
-                    });
-                });
+                }, function () { // block by height not found, search on PhoneNumber
+                  PhoneNumber.get({
+                    phoneNumber: q
+                  }, function (phoneResponse) {
+                    var addr = phoneResponse.value.address;
+                    Address.get({
+                      addrStr: addr
+                    }, function () {
+                      _resetSearch();
+                      $location.path('address/' + addr);
+                    })
+                  }, function () { // phone number not found, search on OpReturn
+                    var hex = lib.StrToHex(q);
+                    OpReturn.get({
+                      opreturnHash: hex
+                    }, function () {
+                      _resetSearch();
+                      $location.path('opreturn/' + hex);
+                    },
+                      function () { //not found, fail :(
+                        $scope.loading = false;
+                        _badQuery();
+                      });
+                  })
+                })
               }
               else {
                 var hex = lib.StrToHex(q);
