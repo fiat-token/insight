@@ -38,13 +38,13 @@
     "serve-favicon": "^2.4.3"
   },
   "devDependencies": {
-    "bower": "~1.8.0",
-    "grunt": ">=0.4.5 <1.0.0",
+    "bower": "^1.8.2",
+    "grunt": "^1.0.1",
     "grunt-angular-gettext": "^2.3.6",
     "grunt-cli": "~0.1.11",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-jshint": "~0.8.0",
-    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-uglify": "^3.1.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-css": "^0.5.4",
     "grunt-macreload": "^0.1.4",

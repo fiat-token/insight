@@ -13,7 +13,11 @@ angular.module('insight').config(function($routeProvider) {
     }).
     when('/tx/send', {
       templateUrl: 'views/transaction_sendraw.html',
-      title: 'Broadcast Raw Transaction'
+      title: 'Send Transaction'
+    }).
+    when('/tx/send/:txid/:vout/:amount', {
+      templateUrl: 'views/transaction_sendraw.html',
+      title: 'Send Transaction'
     }).
     when('/tx/:txId/:v_type?/:v_index?', {
       templateUrl: 'views/transaction.html',

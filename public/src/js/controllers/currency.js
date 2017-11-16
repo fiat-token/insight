@@ -29,6 +29,25 @@ angular.module('insight.currency').controller('CurrencyController',
       return 'value error';
     };
 
+    $rootScope.currency.getConvertionValue = function(value) {
+      value = value * 1; // Convert to number
+
+      if (!isNaN(value) && typeof value !== 'undefined' && value !== null) {
+        if (value === 0.00000000) return '0 ' + this.symbol; // fix value to show
+
+        var response;
+        this.factor = 10000;
+        response = _roundFloat((value * this.factor), 8);
+
+        // prevent sci notation
+        if (response < 1e-7) response=response.toFixed(8);
+
+        return response;
+      }
+
+      return 'value error';
+    };
+
     $scope.setCurrency = function(currency) {
       $rootScope.currency.symbol = currency;
       localStorage.setItem('insight-currency', currency);

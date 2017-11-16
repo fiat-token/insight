@@ -206,18 +206,25 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
 });
 
 angular.module('insight.transactions').controller('SendRawTransactionController',
-  function($scope, $http, Api) {
+  function($scope, $http, Api, $routeParams) {
   $scope.transaction = '';
   $scope.status = 'ready';  // ready|loading|sent|error
   $scope.txid = '';
   $scope.error = null;
+  $scope.txidToSpend = $routeParams.txid;
+  $scope.vout = $routeParams.vout;
+  $scope.amount = $routeParams.amount;
 
   $scope.formValid = function() {
     return !!$scope.transaction;
   };
   $scope.send = function() {
     var postData = {
-      rawtx: $scope.transaction
+      txidToSpend: $scope.txidToSpend,
+      vout: $scope.vout,
+      amount: $scope.amount,
+      address: $scope.address,
+      privKey: $scope.privKey
     };
     $scope.status = 'loading';
     $http.post(Api.apiPrefix + '/tx/send', postData)
