@@ -214,6 +214,7 @@ angular.module('insight.transactions').controller('SendRawTransactionController'
   $scope.txidToSpend = $routeParams.txid;
   $scope.vout = $routeParams.vout;
   $scope.amount = $routeParams.amount;
+  $scope.address = "VFuSGvJGWMSLy7HuPQWezDi3qoAQ6VhtY5"; //Golden Key address as default
 
   $scope.formValid = function() {
     return !!$scope.transaction;
