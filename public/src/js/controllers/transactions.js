@@ -215,17 +215,24 @@ angular.module('insight.transactions').controller('SendRawTransactionController'
   $scope.vout = $routeParams.vout;
   $scope.amount = $routeParams.amount;
   $scope.address = "VFuSGvJGWMSLy7HuPQWezDi3qoAQ6VhtY5"; //Golden Key address as default
+  $scope.opreturn = "Golden Key";
 
   $scope.formValid = function() {
     return !!$scope.transaction;
   };
   $scope.send = function() {
+    var lengthHex = $scope.opreturn.length.toString(16);
+    if (lengthHex.length == 1) lengthHex = '0' + lengthHex;
+    var opret = lib.StrToHex($scope.opreturn);
+    var message = "1d" + lengthHex + opret;
+
     var postData = {
       txidToSpend: $scope.txidToSpend,
       vout: $scope.vout,
       amount: $scope.amount,
       address: $scope.address,
-      privKey: $scope.privKey
+      privKey: $scope.privKey,
+      opreturn: message
     };
     $scope.status = 'loading';
     $http.post(Api.apiPrefix + '/tx/send', postData)
