@@ -1,0 +1,50 @@
+<section data-ng-controller="OutstandingController">
+    <div class="page-header">
+        <h1>
+            <span translate>Current outstanding in Virtual Token network</span>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <form class="form-horizontal" role="form">
+
+                <div class="form-group">
+                    <label for="height" class="col-sm-2 control-label" translate>
+                            Height
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="height" data-ng-model="outstanding.height" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="transactions" class="col-sm-2 control-label" translate>
+                            Transactions
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="transactions" data-ng-model="outstanding.transactions" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txouts" class="col-sm-2 control-label" translate>
+                            UTXOs
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="txouts" data-ng-model="outstanding.txouts" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="outstanding" class="col-sm-2 control-label" translate>
+                            Total Amount
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="total_amount" data-ng-model="outstanding.total_amount" disabled>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>

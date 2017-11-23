@@ -26,7 +26,8 @@ angular.module('insight',[
   'insight.messages',
   'insight.login',
   'insight.opreturns',
-  'insight.phoneNumber'
+  'insight.phoneNumber',
+  'insight.outstanding'
 ]);
 
 angular.module('insight.system', []);
@@ -43,6 +44,7 @@ angular.module('insight.messages', []);
 angular.module('insight.login', []);
 angular.module('insight.opreturns', []);
 angular.module('insight.phoneNumber',[]);
+angular.module('insight.outstanding',[]);
 
 angular.module('insight').config(['$httpProvider', function ($httpProvider) {
   $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + lib.getToken();
