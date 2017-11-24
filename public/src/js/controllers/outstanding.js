@@ -13,7 +13,7 @@ angular.module('insight.outstanding').controller('OutstandingController',
                 $http.get(Api.apiPrefix + '/addr/' + $scope.issuerAddress + '/balance')
                 .success(function (balance, status, headers, config) {
                     if(balance)
-                        $scope.outstanding.total_amount -= (balance / $rootScope.currency.factor);
+                        $scope.outstanding.total_amount -= (balance / 10000);
     
                 })
                 .error(function (data, status, headers, config) {
