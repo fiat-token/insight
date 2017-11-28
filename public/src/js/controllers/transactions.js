@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('insight.transactions').controller('transactionsController',
-function($scope, $rootScope, $routeParams, $location, Global, Transaction, TransactionsByBlock, TransactionsByAddress, OpReturn) {
+function($scope, $rootScope, $routeParams, $location, Global, Transaction, TransactionsByBlock, TransactionsByAddress, OpReturn, SendToIBAN) {
   $scope.global = Global;
   $scope.loading = false;
   $scope.loadedBy = null;
@@ -20,7 +20,9 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
     var u = 0;
 
     for(var i=0; i < l; i++) {
-
+      
+      items[i].opreturnAmount = 0;
+      
       var notAddr = false;
       // non standard input
       if (items[i].scriptSig && !items[i].addr) {
@@ -34,6 +36,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
         items[i].scriptPubKey.addresses = [lib.opReturnCleaning(items[i].scriptPubKey.asm)];
         items[i].notAddr = true;
         notAddr = true;
+        items[i].opreturnAmount += items[i].value;
       }
 
       // multiple addr at output
@@ -130,6 +133,29 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
     });
   }
 
+  var _bySendToIban = function () {
+    $scope.totalSentToIBAN = 0;
+    SendToIBAN.get(function (txs) {
+      pageNum += 1;
+      $scope.loading = false;
+      txs.result.forEach(function (tx) {
+        var valueIn = 0;
+        for (index = 0; index < tx.vin.length; index++)
+        {
+          valueIn += tx.vin[index].valueSat;
+          tx.vin[index].addr = tx.vin[index].address;
+        }
+        tx.fees = (valueIn - tx.valueOut) / 1e8;
+        tx.valueOut = tx.valueOut / 1e8;
+        _processTX(tx);
+        for (i = 0; i < tx.vout.length; i++)
+          $scope.totalSentToIBAN += tx.vout[i].opreturnAmount;        
+        
+        $scope.txs.push(tx);
+      });
+    });
+  }
+
   var _findTx = function(txid) {
     Transaction.get({
       txId: txid
@@ -174,6 +200,9 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
       }
       else if($scope.loadedBy === 'opreturn') {
         _byOpreturn();
+      }
+      else if($scope.loadedBy === 'sendToIban') {
+        _bySendToIban();
       }
       else {
         _byBlock();
@@ -221,10 +250,7 @@ angular.module('insight.transactions').controller('SendRawTransactionController'
     return !!$scope.transaction;
   };
   $scope.send = function() {
-    var lengthHex = $scope.opreturn.length.toString(16);
-    if (lengthHex.length == 1) lengthHex = '0' + lengthHex;
-    var opret = lib.StrToHex($scope.opreturn);
-    var message = "1d" + lengthHex + opret;
+    var message = lib.createOpReturn("1d", $scope.opreturn);
 
     var postData = {
       txidToSpend: $scope.txidToSpend,

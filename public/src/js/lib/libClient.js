@@ -53,5 +53,11 @@
             hex += '' + str.charCodeAt(i).toString(16);
         }
         return hex;
-    }
+    };
+    lib.createOpReturn = function (type, message) {
+        var lengthHex = message.length.toString(16);
+        if (lengthHex.length == 1) lengthHex = '0' + lengthHex;
+        var opret = lib.StrToHex(message);
+        return type + lengthHex + opret;
+    };
 } (window.lib = window.lib || {}, jQuery));

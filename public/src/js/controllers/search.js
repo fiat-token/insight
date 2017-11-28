@@ -60,7 +60,7 @@ angular.module('insight.search').controller('SearchController',
                       $location.path('address/' + addr);
                     })
                   }, function () { // phone number not found, search on OpReturn
-                    var hex = lib.StrToHex(q);
+                    var hex = lib.createOpReturn("1d", q);
                     OpReturn.get({
                       opreturnHash: hex
                     }, function () {
@@ -75,7 +75,7 @@ angular.module('insight.search').controller('SearchController',
                 })
               }
               else {
-                var hex = lib.StrToHex(q);
+                var hex = lib.createOpReturn("1d", q);
                 OpReturn.get({
                   opreturnHash: hex
                 }, function () {
