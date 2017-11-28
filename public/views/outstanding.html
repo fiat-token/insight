@@ -31,7 +31,7 @@
                             Total Amount
                     </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="total_amount" value="{{outstanding.total_amount / 1000}}" disabled >
+                        <input type="text" class="form-control" id="total_amount" value="{{(outstanding.total_amount / 10000).toFixed(4)}}" disabled >
                     </div>
                 </div>
 
