@@ -40,7 +40,7 @@
     </div>
     <div data-ng-controller="transactionsController" data-ng-init="load('sendToIban')">
         <h3 translate>Send to IBAN Transactions</h3>
-        <h3>Total sent: {{totalSentToIBAN}}</h3>
+        <h3>Total sent: {{$root.currency.getConvertionValue(totalSentToIBAN)}}</h3>
         <div data-ng-include src="'views/transaction/list.html'" when-scrolled="loadMore()"></div>
       </div>
 </section>
