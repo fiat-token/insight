@@ -66,11 +66,10 @@ angular.module('insight.search').controller('SearchController',
                     }, function () {
                       _resetSearch();
                       $location.path('opreturn/' + hex);
-                    },
-                      function () { //not found, fail :(
-                        $scope.loading = false;
-                        _badQuery();
-                      });
+                    }, function () { //not found, fail :(
+                      $scope.loading = false;
+                      _badQuery();
+                    })
                   })
                 })
               }
@@ -78,20 +77,32 @@ angular.module('insight.search').controller('SearchController',
                 var hex = lib.createOpReturn("1d", q);
                 OpReturn.get({
                   opreturnHash: hex
-                }, function () {
-                  _resetSearch();
-                  $location.path('opreturn/' + hex);
-                },
-                  function () { //not found, fail :(
-                    $scope.loading = false;
-                    _badQuery();
+                }, function (response) {
+                  if (!response.error) {
+                    _resetSearch();
+                    $location.path('opreturn/' + hex);
                   }
-                );
-              };
+                  else {
+                    var iban = lib.createOpReturn("1c", q);
+                    OpReturn.get({
+                      opreturnHash: iban
+                    }, function (ibanResponse) {
+                      if (!ibanResponse.error) {
+                        _resetSearch();
+                        $location.path('opreturn/' + iban);
+                      }
+                      else {
+                        $scope.loading = false;
+                        _badQuery();
+                      }
+                    })
+                  }
 
+                });
+              }
             });
         });
-      });
 
+      })
     }
   });
