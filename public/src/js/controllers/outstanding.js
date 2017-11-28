@@ -8,12 +8,12 @@ angular.module('insight.outstanding').controller('OutstandingController',
         $http.get(Api.apiPrefix + '/outstanding' )
             .success(function (txoutsetinfo, status, headers, config) {
                 $scope.outstanding = txoutsetinfo.result;
-                $scope.outstanding.total_amount = ($scope.outstanding.total_amount * 10000).toFixed(4);
+                $scope.outstanding.total_amount = ($scope.outstanding.total_amount * 10000).toFixed(2);
                 
                 $http.get(Api.apiPrefix + '/addr/' + $scope.issuerAddress + '/balance')
                 .success(function (balance, status, headers, config) {
                     if(balance)
-                        $scope.outstanding.total_amount -= (balance / 10000).toFixed(4);
+                        $scope.outstanding.total_amount -= (balance / 10000).toFixed(2);
     
                 })
                 .error(function (data, status, headers, config) {
