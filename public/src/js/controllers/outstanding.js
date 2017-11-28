@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('insight.outstanding').controller('OutstandingController',
-    function ($scope, $rootScope, $http, Api) {
+    function ($scope, $http, Api) {
         $scope.issuerAddress = "VQojEPjGcbiHr4UzEahegSdwwHeCqQKxCd";
         $scope.outstanding = {};
 
         $http.get(Api.apiPrefix + '/outstanding' )
             .success(function (txoutsetinfo, status, headers, config) {
                 $scope.outstanding = txoutsetinfo.result;
-                $scope.outstanding.total_amount = $rootScope.currency.getConvertionValue($scope.outstanding.total_amount).toFixed(4);
+                $scope.outstanding.total_amount = ($scope.outstanding.total_amount * 10000).toFixed(4);
                 
                 $http.get(Api.apiPrefix + '/addr/' + $scope.issuerAddress + '/balance')
                 .success(function (balance, status, headers, config) {
